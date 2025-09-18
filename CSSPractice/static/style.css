@@ -1,0 +1,27 @@
+body
+{
+    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    background-blend-mode: overlay;
+    width: 900px;
+    margin: auto;
+    border: 10px dashed pink;
+    padding: 10px;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    text-align: center;
+}
+h1
+{
+    font-family: "Papyrus", fantasy;
+    color: green;
+    text-align: center;
+    font-size: 72px;
+    text-shadow: 2px 2px 4px #000000;
+
+}
+.passion-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff00ff; 
+    transform: rotate(-5deg);
+    display: inline-block;
+}
