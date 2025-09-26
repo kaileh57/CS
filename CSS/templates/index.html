@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owlbaba - The One Stop Shop for Owl Adjacent Needs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header id="main-header">
+        <div class="header-content">
+            <img src="{{ url_for('static', filename='owlbaba.png') }}" alt="Owl Baba" class="logo-image">
+            <div class="site-title">
+                <h1>Welcome to Owlbaba</h1>
+                <p class="tagline">The one stop shop for all your owl adjacent needs.</p>
+            </div>
+        </div>
+        <hr class="header-divider">
+    </header>
+
+    <main class="main-content">
+        <section class="products-section">
+            <h2 class="products-heading">Our Available Creatures</h2>
+            <div class="product-grid">
+                <article class="product-card">
+                    <h3 class="product-title">Potoo (not an owl)</h3>
+                    <img src="https://images.birdfact.com/production/common-potoo.jpg?w=1800&h=1350&q=80&auto=format&fit=crop&dm=1730720369&s=2b74a985cfc038aa476120eb48b015cc" alt="Potoo" class="product-image">
+                    <div class="product-details">
+                        <p class="benefits-title">Benefits of owning this creature.</p>
+                        <ul class="benefits-list">
+                            <li>Looks funny</li>
+                            <li>Will possibly defend you/your territory</li>
+                            <li><a href="https://youtu.be/YbIQ_hUwz9A?t=9" target="_blank" class="sound-link">Sounds pretty cool</a></li>
+                        </ul>
+                        <p class="downsides-title">Downsides of owning this creature.</p>
+                        <ul class="downsides-list">
+                            <li>There are no downsides</li>
+                        </ul>
+                        <button disabled class="product-button out-of-stock">$2999.99 [OUT OF STOCK]</button>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <h3 class="product-title">African Spotted Eagle-Owl</h3>
+                    <img src="https://i.ytimg.com/vi/WX9YkC7Ommk/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLATuD6RNQuf8v5uTnAajjNpqfbD8A" alt="African Spotted Eagle-Owl" class="product-image">
+                    <div class="product-details">
+                        <p class="benefits-title">Benefits of owning this being.</p>
+                        <ul class="benefits-list">
+                            <li>Will ask you "who" hurt you</li>
+                            <li>Probably going to track that guy down</li>
+                            <li><a href="https://youtu.be/9dOmUH1wJeQ?t=9" target="_blank" class="sound-link">Sounds like an owl</a></li>
+                        </ul>
+                        <p class="downsides-title">Downsides of owning this being.</p>
+                        <ul class="downsides-list">
+                            <li>Poop probably</li>
+                        </ul>
+                        <button disabled class="product-button out-of-stock">$29.99 [OUT OF STOCK]</button>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <h3 class="product-title">Snow Owl</h3>
+                    <img src="https://media.istockphoto.com/id/986720632/photo/close-up-snowy-owl-eye-with-wooden-background.jpg?s=612x612&w=0&k=20&c=R3vjYLh-LtH41kSdVW1Ndr_4mdE8Z2AQwDPXGW34ZhI=" alt="Snow Owl" class="product-image">
+                    <div class="product-details">
+                        <p class="benefits-title">Benefits of owning this entity.</p>
+                        <ul class="benefits-list">
+                            <li>Blends in to the snow (not an eyesore)</li>
+                            <li>Doesn't get cold easily</li>
+                            <li>Flies</li>
+                        </ul>
+                        <p class="downsides-title">Downsides of owning this entity.</p>
+                        <ul class="downsides-list">
+                            <li>Sounds kinda boring :/</li>
+                        </ul>
+                        <button disabled class="product-button out-of-stock">$29.99 [OUT OF STOCK]</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section id="partners" class="partners-section">
+            <h3 class="section-heading">AQUIRE FOOD FROM OUR SISTER SITE</h3>
+            <a href="http://2526.lakeside-cs.org/ChaseC/html/" class="partner-link">Gerbilzon</a>
+        </section>
+
+        <section id="care-guide" class="care-section">
+            <h3 class="section-heading">LEARN HOW TO CARE FOR YOUR OWL/OWL LIKE CREATURE</h3>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/jG4DEbJJHmQ" title="How to Care for Your Owl" allowfullscreen class="care-video"></iframe>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
