@@ -1,0 +1,18 @@
+{% extends "base.html.j2" %}
+
+{% block title %}Results{% endblock %}
+{% block body %}
+    {% if full_name %}
+        Hello, {{ full_name }}!
+    {% else %}
+        Hello, stranger!
+    {% endif %}
+    <br>
+    {% if sushi == 'yes' %}
+        I'm glad you like sushi!
+    {% elif sushi == 'no' %}
+        I'm sorry you don't like sushi.
+    {% else %}
+        You didn't say if you like sushi or not.
+    {% endif %}
+{% endblock %}
