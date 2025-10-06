@@ -1,0 +1,67 @@
+{% extends "base.html.j2" %}
+
+{% block body %}
+
+<form method="POST" action="gerbil_order">
+    <h3>Customer Information</h3>
+
+    <label for="customer_name">Your Human Name:</label><br>
+    <input type="text" id="customer_name" name="customer_name" required
+           placeholder="Human Lastname  "><br><br>
+
+    <label for="email">Email (for gerbil updates):</label><br>
+    <input type="email" id="email" name="email" required
+           placeholder="chase@squeakmail.com"><br><br>
+
+    <h3>Order Details</h3>
+
+    <label for="num_gerbils">How many gerbils do you need?</label><br>
+    <input type="number" id="num_gerbils" name="num_gerbils"
+           min="1" max="9999" value="1" required><br>
+    <small>(Warning: Gerbils may unionize)</small><br><br>
+
+    <label for="delivery_time">Preferred Delivery Time:</label><br>
+    <input type="time" id="delivery_time" name="delivery_time" required><br>
+    <small>(Our gerbil delivery drivers work 24/7 but prefer noon because that's nap time (for gerbils))</small><br><br>
+
+    <label>Delivery Urgency:</label><br>
+    <input type="radio" id="leisurely" name="urgency" value="leisurely" required>
+    <label for="leisurely">Leisurely (gerbils will waddle)</label><br>
+
+    <input type="radio" id="standard" name="urgency" value="standard">
+    <label for="standard">Standard (gerbils will scurry)</label><br>
+
+    <input type="radio" id="emergency" name="urgency" value="emergency">
+    <label for="emergency">EMERGENCY (gerbils will sprint)</label><br>
+
+    <input type="radio" id="maximum" name="urgency" value="MAXIMUM_GERBIL_SPEED">
+    <label for="maximum">MAXIMUM GERBIL SPEED</label><br><br>
+
+    <label for="theme_color">GERBIL Color:</label><br>
+    <input type="color" id="theme_color" name="theme_color" value="#ff6b6b"><br>
+    <small>(Gerbils appreciate aesthetic presentation)</small><br><br>
+
+    <label>Include Accessories:</label><br>
+    <input type="checkbox" id="acc1" name="accessories" value="Tiny Hat">
+    <label for="acc1">Tiny Hat (+$2.99)</label><br>
+
+    <input type="checkbox" id="acc2" name="accessories" value="Sunglasses">
+    <label for="acc2">Miniature Sunglasses (+$4.99)</label><br>
+
+    <input type="checkbox" id="acc3" name="accessories" value="Cape">
+    <label for="acc3">Superhero Cape (+$3.99)</label><br>
+
+    <input type="checkbox" id="acc4" name="accessories" value="Diploma">
+    <label for="acc4">Fake Diploma (+$1.99)</label><br><br>
+
+    <label for="special_instructions">Special Instructions for Your Gerbils:</label><br>
+    <textarea id="special_instructions" name="special_instructions"
+              rows="4" cols="50"
+              placeholder="e.g., Please teach them advanced calculus during transit"></textarea><br><br>
+
+    <input type="submit" value="UNLEASH THE GERBILS">
+</form>
+
+<p><a href="/">← Back to Homepage (if you're having second thoughts about the gerbils)</a></p>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html.j2" %}
+
+{% block body %}
+<form method ="POST" action="results">
+    Full name: <br>
+    <input type="text" name="full_name"><br>
+    Do you like sushi? <br>
+    <input type="radio" name="sushi" value="yes"> Yes <br>
+    <input type="radio" name="sushi" value="no"> No <br>
+    Do you have a bike or a car? <br>
+    <input type="checkbox" name="vehicle" value="Bike"> I have a bike
+    <input type="checkbox" name="vehicle" value="Car"> I have a car <br>
+    <input type="submit" value="Submit">
+</form>
+<a href="pokemonInfo?pokemon=pikachu">Pikachu Info</a>
+<a href="pokemonInfo?pokemon=charmander">Charmander Info</a>
+<a href="pokemonInfo?pokemon=bulbasaur">Bulbasaur Info</a>
+{% endblock %}

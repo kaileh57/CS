@@ -1,0 +1,33 @@
+{% extends "base.html.j2" %}
+
+{% block body %}
+<h1>Order Confirmed</h1>
+
+<h3>Your Order:</h3>
+
+<p><strong>Customer:</strong> {{ customer_name }}</p>
+<p><strong>Email:</strong> {{ email }}</p>
+<p><strong>Number of Gerbils:</strong> {{ num_gerbils }}</p>
+<p><strong>Delivery Time:</strong> {{ delivery_time }}</p>
+<p><strong>Urgency:</strong> {{ urgency }}</p>
+<p><strong>Color:</strong> {{ theme_color }}</p>
+
+{% if accessories %}
+    <p><strong>Accessories:</strong></p>
+    <ul>
+    {% for accessory in accessories %}
+        <li>{{ accessory }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p><strong>Accessories:</strong> None</p>
+{% endif %}
+
+{% if special_instructions %}
+    <p><strong>Special Instructions:</strong> {{ special_instructions }}</p>
+{% endif %}
+
+<p><a href="/gerbilzon">Order More Gerbils</a></p>
+<p><a href="/">Return to Homepage</a></p>
+
+{% endblock %}
