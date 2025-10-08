@@ -4,7 +4,6 @@
 <div class="container">
     <h1>Choose Your Adventure</h1>
     <p>Welcome, brave adventurer! Before you begin your journey, tell us about your character.</p>
-    
     {% if errors %}
         <div class="error-box">
             <h3>Please fix the following errors:</h3> <!-- Literally never gonna be my fault 😎 -->
@@ -15,8 +14,7 @@
             </ul>
         </div>
     {% endif %}
-    
-    <form method="GET" action="{{ url_for('start_adventure') }}"> <!-- had to do this for the remote server -->
+    <form method="POST" action="{{ url_for('start_adventure') }}"> <!-- had to do this for the remote server -->
         <h2>Create Your Character</h2>
         
         <label for="name">Character Name:</label><br>

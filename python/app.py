@@ -43,15 +43,15 @@ def build_character_summary(name, age, character_class, starting_item, backstory
     return summary
 
 # I've used this technique in the past, but basically the idea is that we don't HAVE to route to a page named after the route, we can just use it as a function to handle the request
-@app.route('/start_adventure', methods=['GET'])
+@app.route('/start_adventure', methods=['POST'])
 def start_adventure():
     # Get character creation form data
-    name = request.args.get('name')
-    age = request.args.get('age')
-    character_class = request.args.get('character_class')
-    starting_item = request.args.get('starting_item')
-    backstory = request.args.get('backstory')
-    theme_color = request.args.get('theme_color')
+    name = request.form.get('name')
+    age = request.form.get('age')
+    character_class = request.form.get('character_class')
+    starting_item = request.form.get('starting_item')
+    backstory = request.form.get('backstory')
+    theme_color = request.form.get('theme_color')
     # Server-side validation, as  requested
     errors = []
     if not name or name.strip() == "":
@@ -94,13 +94,13 @@ def start_adventure():
                          theme_color=theme_color) # I don't really get why people make a whole other variable to just pass through a value
 
 # Same note as above, but for the continue_story route
-@app.route('/continue_story', methods=['GET'])
+@app.route('/continue_story', methods=['POST'])
 def continue_story():
     # Get the choice and story history
-    choice = request.args.get('choice')
-    story_history = request.args.get('story_history')
-    name = request.args.get('name')
-    theme_color = request.args.get('theme_color')
+    choice = request.form.get('choice')
+    story_history = request.form.get('story_history')
+    name = request.form.get('name')
+    theme_color = request.form.get('theme_color')
     # Server-side validation
     if not choice or choice.strip() == "":
         # If no choice provided, just show the current story

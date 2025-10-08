@@ -10,7 +10,7 @@
     </div>
     <div class="choice-section">
         <h3>What do you do next?</h3>
-        <form method="GET" action="{{ url_for('continue_story') }}">  <!-- had to do this for the remote server -->
+        <form method="POST" action="{{ url_for('continue_story') }}"> <!-- had to do this for the remote server -->
             <!-- Hidden fields to maintain state -->
             <!-- While he may not have really helped, I thank Evan M for the valuable lessons I learned watching him suffer through this -->
             <!-- the eventual solution was provided by w3 schools -->
