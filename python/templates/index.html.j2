@@ -7,7 +7,7 @@
     
     {% if errors %}
         <div class="error-box">
-            <h3>Please fix the following errors:</h3> <!-- Literally never gonna be my fault -->
+            <h3>Please fix the following errors:</h3> <!-- Literally never gonna be my fault 😎 -->
             <ul>
             {% for error in errors %}
                 <li>{{ error }}</li>
@@ -16,7 +16,7 @@
         </div>
     {% endif %}
     
-    <form method="GET" action="/start_adventure">
+    <form method="GET" action="{{ url_for('start_adventure') }}"> <!-- had to do this for the remote server -->
         <h2>Create Your Character</h2>
         
         <label for="name">Character Name:</label><br>
