@@ -1,0 +1,57 @@
+{% extends "base.html.j2" %}
+
+{% block body %}
+<div class="container">
+    <h1>Choose Your Adventure</h1>
+    <p>Welcome, brave adventurer! Before you begin your journey, tell us about your character.</p>
+    
+    {% if errors %}
+        <div class="error-box">
+            <h3>Please fix the following errors:</h3> <!-- Literally never gonna be my fault -->
+            <ul>
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    
+    <form method="GET" action="/start_adventure">
+        <h2>Create Your Character</h2>
+        
+        <label for="name">Character Name:</label><br>
+        <input type="text" id="name" name="name" required 
+               placeholder="Enter your hero's name" maxlength="50"><br>
+        
+        <label for="age">Age:</label><br>
+        <input type="number" id="age" name="age" required 
+               min="1" max="999" value="25"><br>
+        <small>Enter your character's age (1-999)</small><br> <!-- why limit them to humans -->
+        
+        <label for="character_class">Character Class:</label><br>
+        <select id="character_class" name="character_class" required>
+            <option value="">-- Select a class --</option> <!-- I'm just gonna assume they're not gonna select this, I have serverside validation to cover the case -->
+            <option value="Warrior">Warrior - Strong and brave</option>
+            <option value="Mage">Mage - Wise and magical</option>
+            <option value="Rogue">Rogue - Sneaky and clever</option>
+            <option value="Ranger">Ranger - Swift and resourceful</option>
+            <option value="Bard">Bard - Charming and creative</option>
+        </select><br>
+        
+        <label for="starting_item">Starting Item:</label><br>
+        <input type="text" id="starting_item" name="starting_item" required
+               placeholder="What item do you carry?" maxlength="100"><br>
+        <small>Examples: rusty sword, ancient spellbook, lucky coin</small><br>
+        
+        <label for="backstory">Character Backstory (optional):</label><br>
+        <textarea id="backstory" name="backstory" rows="4" cols="50"
+                  placeholder="Tell us about your character's past..."></textarea><br>
+        
+        <label for="theme_color">Choose Your Theme Color:</label><br>
+        <input type="color" id="theme_color" name="theme_color" value="#4a4a8a"><br>
+        <small>This will personalize your adventure experience</small><br>
+        
+        <input type="submit" value="Begin Adventure" class="submit-btn">
+    </form>
+</div>
+{% endblock %}

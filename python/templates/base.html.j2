@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- I am SO meta 😎 -->
+        <!-- Instead of doing this per page, I chose to do it "site" wide -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Choose Your Adventure</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>
