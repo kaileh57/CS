@@ -1,0 +1,36 @@
+{% extends "base.html.j2" %}
+
+{% block body %}
+
+<h2>Create New Post</h2>
+
+{% if errors %}
+    <!-- Styling to make errors stand out -->
+    <div style="background-color: #ffcccc; border: 1px solid red; padding: 10px; margin: 10px 0;">
+        <strong>Errors:</strong>
+        <ul>
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+<!-- Form to create a new post -->
+<form method="POST" action="/create">
+    <p>
+        <label for="message">Message:</label><br><!-- Client side validation for message -->
+        <textarea id="message" name="message" 
+                  rows="5" cols="50" 
+                  required 
+                  minlength="1" 
+                  maxlength="1000">{{ message if message else '' }}</textarea>
+    </p>
+    <p>
+        <button type="submit">Create Post</button>
+        <a href="/">Back to Main Page</a>
+        <!-- Back to main page link, tragically cannot close page without JS -->
+    </p>
+</form>
+<p><em>Note: All posts start with 10 lives. After creating your post, close this window/tab and return to the main page.</em></p>
+{% endblock %}
+
