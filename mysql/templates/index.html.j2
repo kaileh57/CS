@@ -2,7 +2,7 @@
 
 
 {% block body %}
-<!-- Auto-refresh page every 5 seconds for live updates, credit to Evan M -->
+<!-- Auto-refresh page every 5 seconds for semi-live updates, credit to Evan M -->
 <meta http-equiv="refresh" content="5">
 
 <p><a href="{{ url_for('create') }}" target="_blank">Create New Post (Opens in new window)</a></p>
@@ -14,10 +14,10 @@
         <div style="border: 1px solid black; margin: 10px; padding: 10px;">
             <p><strong>Posted:</strong> {{ post.created_at }}</p>
             <p><strong>Message:</strong> {{ post.message }}</p>
-            <p><strong>Lives Remaining:</strong> {{ post.lives }}</p>
+            <p><strong>Time Remaining:</strong> {{ (post.seconds_remaining // 60)|int }}m {{ (post.seconds_remaining % 60)|int }}s</p>
             
             <form method="POST" action="{{ url_for('add_life', post_id=post.post_id) }}" style="display: inline;">
-                <button type="submit">Add Life (+1)</button>
+                <button type="submit">Add Time (+1 minute)</button>
             </form>
         </div>
     {% endfor %}
