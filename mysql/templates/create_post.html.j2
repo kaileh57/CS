@@ -16,7 +16,7 @@
     </div>
 {% endif %}
 <!-- Form to create a new post -->
-<form method="POST" action="/create">
+<form method="POST" action="{{ url_for('create') }}">
     <p>
         <label for="message">Message:</label><br><!-- Client side validation for message -->
         <textarea id="message" name="message" 
@@ -27,7 +27,7 @@
     </p>
     <p>
         <button type="submit">Create Post</button>
-        <a href="/">Back to Main Page</a>
+        <a href="{{ url_for('index') }}">Back to Main Page</a>
         <!-- Back to main page link, tragically cannot close page without JS -->
     </p>
 </form>

@@ -5,7 +5,7 @@
 <!-- Auto-refresh page every 5 seconds for live updates, credit to Evan M -->
 <meta http-equiv="refresh" content="5">
 
-<p><a href="/create" target="_blank">Create New Post (Opens in new window)</a></p>
+<p><a href="{{ url_for('create') }}" target="_blank">Create New Post (Opens in new window)</a></p>
 <hr>
 <h2>Active Posts</h2>
 <!-- If there are posts, display them -->
@@ -16,7 +16,7 @@
             <p><strong>Message:</strong> {{ post.message }}</p>
             <p><strong>Lives Remaining:</strong> {{ post.lives }}</p>
             
-            <form method="POST" action="/addlife/{{ post.post_id }}" style="display: inline;">
+            <form method="POST" action="{{ url_for('add_life', post_id=post.post_id) }}" style="display: inline;">
                 <button type="submit">Add Life (+1)</button>
             </form>
         </div>

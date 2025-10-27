@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
@@ -59,16 +59,17 @@ def create():
         # Show success page that tells user to close window
         return render_template('post_created.html.j2')
 
-# Add life to a post (increment lives by 1, max 10)
+# Add life to a post (increment lives by 2, max 10)
+# We add 2 because redirecting to index will immediately decrement 1 when viewing
 @app.route('/addlife/<int:post_id>', methods=['POST'])
 def add_life(post_id):
     cur = mysql.connection.cursor()
-    # Secured query to add life (but don't exceed 10)
-    # This should be enough logic to prevent extra lives as this is serverside code and we trust the server
-    query = "UPDATE kellenh_posts SET lives = LEAST(lives + 1, 10) WHERE post_id = %s;"
+    # Secured query to add 2 lives (but don't exceed 10)
+    # Adding 2 compensates for the -1 that happens when index page loads after redirect
+    query = "UPDATE kellenh_posts SET lives = LEAST(lives + 2, 10) WHERE post_id = %s;"
     queryVars = (post_id,)
     cur.execute(query, queryVars)
     mysql.connection.commit()
     cur.close()
     # Redirect back to main page
-    return redirect('/')
+    return redirect(url_for('index'))

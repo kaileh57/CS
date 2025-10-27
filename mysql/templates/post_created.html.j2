@@ -6,8 +6,8 @@
 <p><strong>You can now:</strong></p>
 <ul>
     <li>Close this window/tab and return to the main page</li>
-    <li>Or <a href="/">click here to go back to the main page</a></li>
-    <li>Or <a href="/create">create another post</a></li>
+    <li>Or <a href="{{ url_for('index') }}">click here to go back to the main page</a></li>
+    <li>Or <a href="{{ url_for('create') }}">create another post</a></li>
     <!-- Again wish I could close this page using JS but... -->
 </ul>
 {% endblock %}
