@@ -40,6 +40,9 @@ def create():
         # Validate message (required, not empty)
         if not message:
             errors.append("Message cannot be empty")
+        # Validate message length (max 1000 characters)
+        if len(message) > 1000:
+            errors.append("Message cannot exceed 1000 characters")
         # If validation errors, show them
         if errors:
             return render_template('create_post.html.j2', errors=errors, message=message)
