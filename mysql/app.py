@@ -18,7 +18,7 @@ mysql = MySQL(app)
 def index():
     cur = mysql.connection.cursor()
     
-    # Get all posts that haven't expired yet, ordered by newest first
+    # Get all posts that haven't expired yet, ordered by newest first. Had to extnsively reference documentation for this one, and play around a ton (w3 and stack overflow)
     query = "SELECT *, TIMESTAMPDIFF(SECOND, NOW(), expire_at) as seconds_remaining FROM kellenh_posts WHERE expire_at > NOW() ORDER BY created_at DESC;"
     # I'm not actually deleting the posts, just only rendering the ones that haven't expired
     cur.execute(query)
@@ -63,10 +63,14 @@ def create():
 def add_life(post_id):
     cur = mysql.connection.cursor()
     # Only add time if post hasn't expired yet (prevents bringing back dead posts)
+    # also referenced online docs (w3 and stack overflow) as well as generally searching "is there a least operation in mysql"
+    # but basically this code updates the expireation time with the lower value of either 10 minutes in the future, or one minute from now.
+    # this pretty much clamps it at 10 minutes
+    # and also we check real fast if the post has expiered or not
     query = "UPDATE kellenh_posts SET expire_at = LEAST(DATE_ADD(expire_at, INTERVAL 1 MINUTE), DATE_ADD(NOW(), INTERVAL 10 MINUTE)) WHERE post_id = %s AND expire_at > NOW();"
     queryVars = (post_id,)
     cur.execute(query, queryVars)
     mysql.connection.commit()
     cur.close()
     # Redirect back to main page
-    return redirect(url_for('index'))
+    return redirect(url_for('index')) # need this for deployment to server i think
