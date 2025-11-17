@@ -1,0 +1,23 @@
+{% extends 'base.html.j2' %}
+
+{% block body %}
+<h1>Leaderboard</h1>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Trophies</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.trophies }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br>
+<a href="{{ url_for('welcome') }}">Back to Welcome Page</a>
+{% endblock %}

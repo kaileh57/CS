@@ -40,6 +40,17 @@ def welcome():
         return redirect(url_for('login'))
     return render_template('welcome.html.j2')
 
+@app.route('/leaderboard')
+def leaderboard():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    cur = mysql.connection.cursor()
+    query = "SELECT username, trophies FROM kellenh_players ORDER BY trophies DESC;"
+    cur.execute(query)
+    users = cur.fetchall()
+    cur.close()
+    return render_template('leaderboard.html.j2', users=users)
+
 @app.route('/logout')
 def logout():
     session.clear()
