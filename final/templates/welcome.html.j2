@@ -1,0 +1,7 @@
+{% extends "base.html.j2" %}
+
+{% block body %}
+<h1>Welcome, {{ session.username }}!</h1>
+<p>You have {{ session.trophies }} trophies.</p>
+<a href="{{ url_for('logout') }}">Logout</a>
+{% endblock %}
