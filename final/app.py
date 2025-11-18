@@ -49,7 +49,7 @@ def leaderboard():
     cur.execute(query)
     users = cur.fetchall()
     cur.close()
-    return render_template('leaderboard.html.j2', users=users)
+    return render_template('leaderboard.html.j2', users=users, current_user=session['username'])
 
 @app.route('/logout')
 def logout():
