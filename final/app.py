@@ -1,4 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request, flash, session
+from flask_socketio import SocketIO, emit, join_room, leave_room
 from flask_mysqldb import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
@@ -11,6 +12,7 @@ app.config['MYSQL_PASSWORD'] = 'ACSSE2526'
 app.config['MYSQL_DB'] = '2526finalproject'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.secret_key = 'kellen'
+socketio = SocketIO(app)
 mysql = MySQL(app)
 
 @app.route('/')
@@ -163,3 +165,20 @@ def create_account():
 
 
 
+
+@socketio.on('join')
+def on_join(data):
+    username = data['username']
+    room = data['room']
+    join_room(room)
+    emit('status', {'msg': username + ' has entered the room.'}, room=room)
+
+@socketio.on('message')
+def on_message(data):
+    room = data['room']
+    msg = data['msg']
+    username = data['username']
+    emit('message', {'user': username, 'msg': msg}, room=room)
+
+if __name__ == '__main__':
+    socketio.run(app, debug=True)

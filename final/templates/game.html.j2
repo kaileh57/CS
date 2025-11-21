@@ -39,4 +39,61 @@
     // Poll every 2 seconds
     setInterval(updateGameInfo, 2000);
 </script>
+
+<div id="chat-container" style="position: fixed; right: 0; top: 0; bottom: 0; width: 300px; background-color: #f1f1f1; border-left: 1px solid #ccc; display: flex; flex-direction: column;">
+    <div style="padding: 10px; background-color: #ddd; font-weight: bold;">Chat</div>
+    <div id="chat-messages" style="flex-grow: 1; overflow-y: auto; padding: 10px;"></div>
+    <div style="padding: 10px; display: flex;">
+        <input type="text" id="chat-input" placeholder="Type a message..." style="flex-grow: 1; padding: 5px;">
+        <button onclick="sendMessage()" style="padding: 5px;">Send</button>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf-8">
+    var socket = io();
+    var room = "{{ match.id }}";
+    var username = "{{ session['username'] }}";
+
+    socket.on('connect', function() {
+        socket.emit('join', {username: username, room: room});
+    });
+
+    socket.on('status', function(data) {
+        var msgDiv = document.createElement('div');
+        msgDiv.style.fontStyle = 'italic';
+        msgDiv.style.color = '#888';
+        msgDiv.textContent = data.msg;
+        document.getElementById('chat-messages').appendChild(msgDiv);
+    });
+
+    socket.on('message', function(data) {
+        var msgDiv = document.createElement('div');
+        var userSpan = document.createElement('span');
+        userSpan.style.fontWeight = 'bold';
+        userSpan.textContent = data.user + ': ';
+        var textSpan = document.createElement('span');
+        textSpan.textContent = data.msg;
+        msgDiv.appendChild(userSpan);
+        msgDiv.appendChild(textSpan);
+        document.getElementById('chat-messages').appendChild(msgDiv);
+        var chatMessages = document.getElementById('chat-messages');
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    });
+
+    function sendMessage() {
+        var input = document.getElementById('chat-input');
+        var msg = input.value;
+        if (msg) {
+            socket.emit('message', {username: username, room: room, msg: msg});
+            input.value = '';
+        }
+    }
+
+    document.getElementById('chat-input').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+</script>
 {% endblock %}
