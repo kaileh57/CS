@@ -6,26 +6,28 @@
 <div id="game-info" class="game-info">
     <p><strong>Match ID:</strong> {{ match.id }}</p>
     <p><strong>Host (Player 1):</strong> <span id="p1name">{{ match.p1name }}</span></p>
-    <p><strong>Player 2:</strong> <span id="p2name">{{ match.p2name if match.p2name else 'Waiting for player...' }}</span></p>
+    <p><strong>Player 2:</strong> <span id="p2name">{{ match.p2name if match.p2name else 'Waiting for player...'
+            }}</span></p>
     <p><strong>Your Role:</strong> {{ 'Host (Player 1)' if is_host else 'Player 2' }}</p>
-    <p><strong>Status:</strong> <span id="status">{{ 'Ready to Start' if match.p2name else 'Waiting for opponent...' }}</span></p>
+    <p><strong>Status:</strong> <span id="status">{{ 'Ready to Start' if match.p2name else 'Waiting for opponent...'
+            }}</span></p>
 </div>
 
 <br>
-<a href="{{ url_for('matches') }}">Back to Matches</a>
+<a href="../matches">Back to Matches</a>
 
 <script>
     const matchId = {{ match.id }};
-    
+
     function updateGameInfo() {
-        fetch(`/api/match/${matchId}`)
+        fetch(`../api/match/${matchId}`)
             .then(response => response.json())
             .then(data => {
                 if (data.error) return;
-                
+
                 document.getElementById('p1name').textContent = data.p1name;
                 document.getElementById('p2name').textContent = data.p2name ? data.p2name : 'Waiting for player...';
-                
+
                 const statusSpan = document.getElementById('status');
                 if (data.p2name) {
                     statusSpan.textContent = 'Ready to Start';
@@ -49,17 +51,19 @@
     </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+    integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+    crossorigin="anonymous"></script>
 <script type="text/javascript" charset="utf-8">
     var socket = io();
     var room = "{{ match.id }}";
     var username = "{{ session['username'] }}";
 
-    socket.on('connect', function() {
-        socket.emit('join', {username: username, room: room});
+    socket.on('connect', function () {
+        socket.emit('join', { username: username, room: room });
     });
 
-    socket.on('status', function(data) {
+    socket.on('status', function (data) {
         var msgDiv = document.createElement('div');
         msgDiv.style.fontStyle = 'italic';
         msgDiv.style.color = '#888';
@@ -67,7 +71,7 @@
         document.getElementById('chat-messages').appendChild(msgDiv);
     });
 
-    socket.on('message', function(data) {
+    socket.on('message', function (data) {
         var msgDiv = document.createElement('div');
         var userSpan = document.createElement('span');
         userSpan.style.fontWeight = 'bold';
@@ -85,7 +89,7 @@
         var input = document.getElementById('chat-input');
         var msg = input.value;
         if (msg) {
-            socket.emit('message', {username: username, room: room, msg: msg});
+            socket.emit('message', { username: username, room: room, msg: msg });
             input.value = '';
         }
     }

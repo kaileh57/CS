@@ -17,7 +17,7 @@ mysql = MySQL(app)
 
 @app.route('/')
 def index():
-    return redirect(url_for('login'))
+    return redirect('login')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -32,22 +32,22 @@ def login():
             session['user_id'] = user['id']
             session['username'] = user['username']
             session['trophies'] = user['trophies']
-            return redirect(url_for('welcome'))
+            return redirect('welcome')
         else:
             flash('Invalid username or password')
-            return redirect(url_for('login'))
+            return redirect('login')
     return render_template('login.html.j2')
 
 @app.route('/welcome')
 def welcome():
     if 'user_id' not in session:
-        return redirect(url_for('login'))
+        return redirect('login')
     return render_template('welcome.html.j2')
 
 @app.route('/leaderboard')
 def leaderboard():
     if 'user_id' not in session:
-        return redirect(url_for('login'))
+        return redirect('login')
     cur = mysql.connection.cursor()
     query = "SELECT username, trophies FROM kellenh_players ORDER BY trophies DESC;"
     cur.execute(query)
@@ -58,7 +58,7 @@ def leaderboard():
 @app.route('/matches')
 def matches():
     if 'user_id' not in session:
-        return redirect(url_for('login'))
+        return redirect('login')
     
     show_all = request.args.get('show_all') == '1'
     
@@ -76,7 +76,7 @@ def matches():
 @app.route('/join_match/<int:match_id>', methods=['POST'])
 def join_match(match_id):
     if 'user_id' not in session:
-        return redirect(url_for('login'))
+        return redirect('../login')
     
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM kellenh_matchmaking WHERE id = %s", (match_id,))
@@ -88,12 +88,12 @@ def join_match(match_id):
         mysql.connection.commit()
     
     cur.close()
-    return redirect(url_for('game', match_id=match_id))
+    return redirect(f'../game/{match_id}')
 
 @app.route('/game/<int:match_id>')
 def game(match_id):
     if 'user_id' not in session:
-        return redirect(url_for('login'))
+        return redirect('../login')
     
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM kellenh_matchmaking WHERE id = %s", (match_id,))
@@ -101,7 +101,7 @@ def game(match_id):
     cur.close()
     
     if not match:
-        return redirect(url_for('matches'))
+        return redirect('../matches')
         
     is_host = match['p1name'] == session['username']
     
@@ -125,7 +125,7 @@ def match_api(match_id):
 @app.route('/create_match', methods=['POST'])
 def create_match():
     if 'user_id' not in session:
-        return redirect(url_for('login'))
+        return redirect('login')
 
     name = request.form['name']
     ipaddress = request.remote_addr
@@ -141,12 +141,12 @@ def create_match():
     match_id = cur.lastrowid
     cur.close()
 
-    return redirect(url_for('game', match_id=match_id))
+    return redirect(f'game/{match_id}')
 
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('login'))
+    return redirect('login')
 
 @app.route('/create_account', methods=['GET', 'POST'])
 def create_account():
@@ -160,7 +160,7 @@ def create_account():
         cur.execute(query, queryVars)
         mysql.connection.commit()
         flash('Account created successfully!')
-        return redirect(url_for('login'))
+        return redirect('login')
     return render_template('create_account.html.j2')
 
 

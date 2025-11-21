@@ -2,12 +2,12 @@
 
 {% block body %}
 <h1>Create Account</h1>
-<form action="/create_account" method="post">
+<form action="create_account" method="post">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username"><br><br>
     <label for="password">Password:</label>
     <input type="password" id="password" name="password"><br><br>
     <input type="submit" value="Create Account">
 </form>
-<p>Already have an account? <a href="{{ url_for('login') }}">Login here</a>.</p>
+<p>Already have an account? <a href="login">Login here</a>.</p>
 {% endblock %}

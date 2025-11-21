@@ -11,7 +11,7 @@
     </thead>
     <tbody>
         {% for user in users %}
-        <tr {% if user.username == current_user %}class="active-row"{% endif %}>
+        <tr {% if user.username==current_user %}class="active-row" {% endif %}>
             <td>{{ user.username }} {% if user.username == current_user %}(you){% endif %}</td>
             <td>{{ user.trophies }}</td>
         </tr>
@@ -19,5 +19,5 @@
     </tbody>
 </table>
 <br>
-<a href="{{ url_for('welcome') }}">Back to Welcome Page</a>
+<a href="welcome">Back to Welcome Page</a>
 {% endblock %}
