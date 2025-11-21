@@ -3,7 +3,7 @@
 {% block body %}
 <h1>Game Lobby: <span id="lobby-name">{{ match.name }}</span></h1>
 
-<div id="game-info">
+<div id="game-info" class="game-info">
     <p><strong>Match ID:</strong> {{ match.id }}</p>
     <p><strong>Host (Player 1):</strong> <span id="p1name">{{ match.p1name }}</span></p>
     <p><strong>Player 2:</strong> <span id="p2name">{{ match.p2name if match.p2name else 'Waiting for player...' }}</span></p>
@@ -40,12 +40,12 @@
     setInterval(updateGameInfo, 2000);
 </script>
 
-<div id="chat-container" style="position: fixed; right: 0; top: 0; bottom: 0; width: 300px; background-color: #f1f1f1; border-left: 1px solid #ccc; display: flex; flex-direction: column;">
-    <div style="padding: 10px; background-color: #ddd; font-weight: bold;">Chat</div>
-    <div id="chat-messages" style="flex-grow: 1; overflow-y: auto; padding: 10px;"></div>
-    <div style="padding: 10px; display: flex;">
-        <input type="text" id="chat-input" placeholder="Type a message..." style="flex-grow: 1; padding: 5px;">
-        <button onclick="sendMessage()" style="padding: 5px;">Send</button>
+<div id="chat-container">
+    <div class="chat-header">Chat</div>
+    <div id="chat-messages"></div>
+    <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="Type a message...">
+        <button onclick="sendMessage()">Send</button>
     </div>
 </div>
 

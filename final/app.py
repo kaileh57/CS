@@ -64,9 +64,9 @@ def matches():
     
     cur = mysql.connection.cursor()
     if show_all:
-        query = "SELECT * FROM kellenh_matchmaking;"
+        query = "SELECT * FROM kellenh_matchmaking ORDER BY id DESC;"
     else:
-        query = "SELECT * FROM kellenh_matchmaking WHERE (p2name IS NULL OR p2name = '') AND p1lastping >= DATE_SUB(NOW(), INTERVAL 10 MINUTE);"
+        query = "SELECT * FROM kellenh_matchmaking WHERE (p2name IS NULL OR p2name = '') AND p1lastping >= DATE_SUB(NOW(), INTERVAL 10 MINUTE) ORDER BY id DESC;"
     
     cur.execute(query)
     matches = cur.fetchall()
